@@ -56,10 +56,17 @@ public class InvertedIndex {
         list = this.getSortedPostingList();
         
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getTerm().equals(list.get(i+1).getTerm())) {        
-                Term tempTerm = new Term(list.get(i).getTerm());
-                dictionary.add(tempTerm);
+            for (int j = 0; j < list.size()-1-i; j++) {
+                if (list.get(j).getTerm().equals(list.get(j+1).getTerm())) {        
+                    Term tempTerm = new Term(list.get(i).getTerm());
+                    dictionary.add(tempTerm);
+                }                
             }
+        }
+        for (int i = 0; i < dictionary.size(); i++) {
+            System.out.println(dictionary.get(i).getTerm()+","
+                    +dictionary.get(i).getNumberOfTerm()+","
+                    +dictionary.get(i).getPostingList());
         }
     }
 }
