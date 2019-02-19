@@ -51,6 +51,15 @@ public class InvertedIndex {
     }
     
     public void makeDictionary(){
+        ArrayList<Posting> list = new ArrayList<Posting>();
         
+        list = this.getSortedPostingList();
+        
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTerm().equals(list.get(i+1).getTerm())) {        
+                Term tempTerm = new Term(list.get(i).getTerm());
+                dictionary.add(tempTerm);
+            }
+        }
     }
 }

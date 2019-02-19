@@ -10,7 +10,7 @@ package model;
  * @author Aureli Isaias
  */
 public class Posting implements Comparable<Posting>{
-     private String term;
+    private String term;
     private Document document;
     
     
