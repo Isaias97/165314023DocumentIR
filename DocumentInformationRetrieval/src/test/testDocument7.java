@@ -13,9 +13,9 @@ import model.Term;
 
 /**
  *
- * @author Aureli Isaias
+ * @author admin
  */
-public class testDocument6 {
+public class testDocument7 {
     public static void main(String[] args) {
         // seting dokumen
         Document doc1 = new Document(1, "computer information retrieval.");
@@ -28,19 +28,21 @@ public class testDocument6 {
         index.addNewDocument(doc1);
         index.addNewDocument(doc2);
         index.addNewDocument(doc3);
-        // panggil fungsi make dictionary
+        // panggil fungsi search
         index.makeDictionary();
-        // panggil term yang ada dan jumlah posting
-        for (int i = 0; i < index.getDictionary().size(); i++) {
-            Term tempTerm = index.getDictionary().get(i);
-            System.out.println(tempTerm.getTerm()+","
-                    +tempTerm.getNumberOfDocument());
-            for (int j = 0; j < tempTerm.getNumberOfDocument(); j++) {
-                Posting tempPosting = tempTerm.getPostingList().get(j);
-//                System.out.println("id_Doc = "+tempPosting.getDocument().getId());
-                Document tempDoc = tempPosting.getDocument();
-                System.out.println("id_doc = "+tempDoc.getId());
-            }
+        ArrayList<Posting> result = index.searchOneWord("computer");
+        // tampilkan isi document dan id-nya
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println("id_doc = " +result.get(i).getDocument().getId());
+            System.out.println(result.get(i).getDocument().getContent());
         }
+        
+        // panggil fungsi search
+//        ArrayList<Posting> result1 = index.search("machine learning");
+        // tampilkan isi document dan id-nya
+//        for (int i = 0; i < result1.size(); i++) {
+//            System.out.println("id_doc = " +result1.get(i).getDocument().getId());
+//            System.out.println(result1.get(i).getDocument().getContent());
+//        }
     }
 }
