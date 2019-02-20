@@ -51,20 +51,39 @@ public class InvertedIndex {
     }
     
     public void makeDictionary(){
-        ArrayList<Posting> list = new ArrayList<Posting>();
-        
-        list = this.getSortedPostingList();
-        
+        // buat posting term terurut
+        ArrayList<Posting> list = getSortedPostingList();        
+        // looping buat list of term (dictionary)
         for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.size()-1-i; j++) {
-                if (list.get(i).getTerm().equals(list.get(i+1).getTerm())) {        
-                    Term tempTerm = new Term(list.get(i).getTerm());
-                    dictionary.add(tempTerm);
-                }                
+            // cek dictionary, kosong?
+            if (dictionary.isEmpty()) {
+                Term term = new Term(list.get(i).getTerm());
+                // tambah posting ke posting list utk term ini
+                term.getPostingList().add(list.get(i));
+                // urutkan posting list
+                
             }
-        }
-        for (int i = 0; i < dictionary.size(); i++) {
-            System.out.println(dictionary.get(i).getTerm());
+            else {
+                // dictionary sudah terisi
+                Term tempTerm = new Term(list.get(i).getTerm());
+                // membandingkan apakah term sudah ada atau belum
+                int posisi = Collections.binarySearch(dictionary, tempTerm);
+                if (posisi < 0) {
+                    // term baru
+                    // tambah posting list ke term
+                    tempTerm.getPostingList().add(list.get(i));
+                    // tambah term ke dictionary
+                    dictionary.add(tempTerm);
+                }
+                else {
+                    // term ada
+                    // tambahkan posting list saja dari exsisting term
+                    dictionary.get(posisi).getPostingList().add(list.get(i));
+                }
+                // urutkan term dictionary
+                Collections.sort(dictionary.get(posisi).getPostingList());
+            }
+           
         }
     }
 }
