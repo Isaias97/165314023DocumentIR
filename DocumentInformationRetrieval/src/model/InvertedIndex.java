@@ -122,8 +122,12 @@ public class InvertedIndex {
         makeDictionary();
         String [] tempQuery = query.split(" ");
         for (int i = 0; i < tempQuery.length; i++) {
-            for (int j = 0; j < i; j++) {
-                
+            String string = tempQuery[i];
+            if (getDictionary().isEmpty()) {
+                return null;
+            }
+            else {
+                int positionTerm = Collections.binarySearch(dictionary, string);
             }
         }
         return null;
@@ -147,6 +151,15 @@ public class InvertedIndex {
     
     public ArrayList<Posting> intersection(ArrayList<Posting> p1,
             ArrayList<Posting> p2){
+        
+        while (true) {            
+            if (true) {
+                
+            }
+            else if (true) {
+                
+            }
+        }
         return null;
     }
 }
