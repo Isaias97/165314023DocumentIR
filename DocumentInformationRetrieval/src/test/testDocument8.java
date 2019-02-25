@@ -32,7 +32,7 @@ public class testDocument8 {
         ArrayList<Posting> result = index.searchOneWord("computer");
         // panggil fungsi search
         ArrayList<Posting> result1 = index.searchOneWord("architecture");
-        // pangging fungsi instersect
+        // panggil fungsi instersect
         ArrayList<Posting> join = index.intersection(result1, result);
         // tampilkan isi document dan id-nya
         for (int i = 0; i < join.size(); i++) {
