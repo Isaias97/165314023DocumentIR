@@ -151,8 +151,46 @@ public class InvertedIndex {
     
     public ArrayList<Posting> intersection(ArrayList<Posting> p1,
             ArrayList<Posting> p2){
+        if (p1 == null || p2 == null) {
+            return new ArrayList<>();
+        }
         
-        
-        return null;
+        ArrayList<Posting> tempPostings = new ArrayList<>();
+        int p1Index = 0;
+        int p2Index = 0;
+
+        Posting post1 = p1.get(p1Index);
+        Posting post2 = p2.get(p2Index);
+
+        while (true) {
+            if (post1.getDocument().getId() == post2.getDocument().getId()) {
+                try {
+                    tempPostings.add(post1);
+                    p1Index++;
+                    p2Index++;
+                    post1 = p1.get(p1Index);
+                    post2 = p2.get(p2Index);
+                } catch (Exception ex) {
+                    break;
+                }
+
+            } else if (post1.getDocument().getId() < post2.getDocument().getId()) {
+                try {
+                    p1Index++;
+                    post1 = p1.get(p1Index);
+                } catch (Exception ex) {
+                    break;
+                }
+
+            } else {
+                try {
+                    p2Index++;
+                    post2 = p2.get(p2Index);
+                } catch (Exception ex) {
+                    break;
+                }
+            }
+        }
+        return tempPostings;
     }
 }
