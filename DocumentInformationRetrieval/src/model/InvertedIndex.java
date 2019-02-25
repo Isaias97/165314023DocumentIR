@@ -152,14 +152,7 @@ public class InvertedIndex {
     public ArrayList<Posting> intersection(ArrayList<Posting> p1,
             ArrayList<Posting> p2){
         
-        while (true) {            
-            if (true) {
-                
-            }
-            else if (true) {
-                
-            }
-        }
+        
         return null;
     }
 }
