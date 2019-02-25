@@ -121,16 +121,11 @@ public class InvertedIndex {
     public ArrayList<Posting> search(String query){
         makeDictionary();
         String [] tempQuery = query.split(" ");
+        ArrayList<ArrayList<Posting>> tempPosting = new ArrayList<>();
         for (int i = 0; i < tempQuery.length; i++) {
-            String string = tempQuery[i];
-            if (getDictionary().isEmpty()) {
-                return null;
-            }
-            else {
-                int positionTerm = Collections.binarySearch(dictionary, string);
-            }
+            tempPosting.add(search(tempQuery[i]));
         }
-        return null;
+        return intersection(tempPosting.get(0), tempPosting.get(1));
     }
     
     public ArrayList<Posting> searchOneWord(String query){
