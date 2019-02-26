@@ -30,7 +30,7 @@ public class testDocument7 {
         index.addNewDocument(doc3);
         // panggil fungsi search
         index.makeDictionary();
-        ArrayList<Posting> result = index.searchOneWord("computer");
+        ArrayList<Posting> result = index.searchOneWord("retrieval");
         // tampilkan isi document dan id-nya
         for (int i = 0; i < result.size(); i++) {
             System.out.println("id_doc = " +result.get(i).getDocument().getId());
