@@ -51,6 +51,7 @@ public class InvertedIndex {
     }
     
     public void makeDictionary(){
+        // cek ada term yang frek. lebih dari 1 pada sebuah dokumen
         // buat posting list term terurut
         ArrayList<Posting> list = getSortedPostingList();
         // looping buat list of term (dictionary)
