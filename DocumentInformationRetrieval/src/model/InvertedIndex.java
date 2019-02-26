@@ -215,12 +215,13 @@ public class InvertedIndex {
     
     public int getDocumentFrequency(String term){
         ArrayList<Posting> tempPostings = new ArrayList<Posting>();
-        int N;
+        String [] query = term.split(" ");
+        int N = 0, ni = 0;
         for (int i = 0; i < listOfDocument.size(); i++) {
             N = listOfDocument.get(i).getId();
-            
+            ni = tempPostings.get(i).getNumberOfTerm();
         }
-        return 0;
+        return N/ni;
     }
     
     public double getInverseDoumentFrequency(String term){
