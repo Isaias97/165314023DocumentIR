@@ -212,4 +212,12 @@ public class InvertedIndex {
         // mengembalikan tempPosting
         return tempPostings;
     }
+    
+    public int getDocumentFrequency(String term){
+        return 0;
+    }
+    
+    public double getInverseDoumentFrequency(String term){
+        return 0;
+    }
 }
