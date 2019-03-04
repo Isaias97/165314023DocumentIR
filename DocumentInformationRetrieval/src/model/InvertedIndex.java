@@ -223,9 +223,27 @@ public class InvertedIndex {
     }
     
     public double getInverseDoumentFrequency(String term){
+        double N = listOfDocument.size();
+        double n = getDocumentFrequency(term);
         
-        return 0;
+        double idf = Math.log10(N/n);
+        return idf;
     }
+    
+    public int getTermFrequency(String term, int idDocument) {
+        int temp = 0;
+        for (int i = 0; i < getListOfDocument().size(); i++) {
+            if (getListOfDocument().get(i).getId() == idDocument) {
+                String[] terms = getListOfDocument().get(i).getListofTerm();
+                for (int j = 0; j < terms.length; j++) {
+                    if (term.equalsIgnoreCase(terms[j])) {
+                        temp = temp + 1;
+                    }
+                }
+            }
+        }
+        return temp;
+}
     
     public ArrayList<Posting> getUnsortedPostingListWithTermNumber() {
         // cek untuk term yang muncul lebih dari 1 kali
