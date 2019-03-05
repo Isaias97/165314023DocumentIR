@@ -324,4 +324,9 @@ public class InvertedIndex {
             }
         }
     }
+    
+    public ArrayList<Posting> makeTFIDF(int idDocument){
+        ArrayList<Posting> temp = new ArrayList<Posting>();
+        return temp;
+    }
 }
