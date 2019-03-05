@@ -223,16 +223,15 @@ public class InvertedIndex {
     }
     
     public double getInverseDoumentFrequency(String term){
-        Term tempTerm = new Term(term);
-        int number = Collections.binarySearch(getDictionary(), tempTerm);
-        if (number > 0) {
-            double N = listOfDocument.size();
-            double n = getDocumentFrequency(term);
-            double idf = Math.log10(N/n);
-            return idf;            
+        
+        double N = listOfDocument.size();
+        double n = getDocumentFrequency(term);
+        if (N == 0) {
+            return 0;
         }
         else {
-            return 0;
+            double idf = Math.log10(N/n);
+            return idf;            
         }
     }
     
@@ -326,7 +325,19 @@ public class InvertedIndex {
     }
     
     public ArrayList<Posting> makeTFIDF(int idDocument){
-        ArrayList<Posting> temp = new ArrayList<Posting>();
-        return temp;
+        ArrayList<Document> tempDoc = listOfDocument;
+        for (int i = 0; i < tempDoc.size(); i++) {
+            if (tempDoc.get(i).getId() == idDocument) {
+                ArrayList<Posting> tempPost = tempDoc.get(i).getListofPosting();
+                for (int j = 0; j < tempPost.size(); j++) {
+                    double tf = getTermFrequency(tempPost.get(j).getTerm(), tempDoc.get(j).getId());
+                    double idf = getInverseDoumentFrequency(tempPost.get(i).getTerm());
+                    double weight = tf * idf;
+                    tempPost.get(i).setTfidf(weight);
+                }
+            return tempPost;
+            }            
+        }
+        return null;
     }
 }
