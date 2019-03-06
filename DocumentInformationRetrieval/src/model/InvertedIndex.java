@@ -333,7 +333,7 @@ public class InvertedIndex {
                     double tf = getTermFrequency(tempPost.get(i).getTerm(), tempDoc.get(i).getId());
                     double idf = getInverseDoumentFrequency(tempPost.get(i).getTerm());
                     double weight = tf * idf;
-                    tempPost.get(i).setTfidf(weight);
+                    tempPost.get(i).setWeight(weight);
                 }
             return tempPost;
             }            
