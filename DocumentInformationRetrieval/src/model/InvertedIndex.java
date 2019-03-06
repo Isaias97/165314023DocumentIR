@@ -336,17 +336,21 @@ public class InvertedIndex {
         else {
             // jika document ada
             doc = listOfDocument.get(cari);
-            ArrayList<Posting> result = doc.getListofPosting();
-            
-            for (int i = 0; i < result.size(); i++) {
+            // membuat tempTerm Term menunjuk ke getDictionary()
+            ArrayList<Term> tempTerm =  getDictionary();
+            // membuat result Posting
+            ArrayList<Posting> result = new ArrayList<Posting>();
+            for (int i = 0; i < tempTerm.size(); i++) {
                 // buat temp Posting
-                Posting temp = result.get(i);
+                Posting temp = new Posting();
                 // panggil fungsi hitung idf
                 double idf = getInverseDcoumentFrequency(temp.getTerm());
                 // panggil fungsi hitung tf
                 double tf = temp.getNumberOfTerm();
                 // hitung tf*idf
                 double weight = tf*idf;
+                // set term ke temp
+                temp.setTerm(tempTerm.get(i).getTerm());
                 // set weight ke temp
                 temp.setWeight(weight);
                 // add temp ke result
