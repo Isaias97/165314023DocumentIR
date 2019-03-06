@@ -222,7 +222,7 @@ public class InvertedIndex {
         return 0;
     }
     
-    public double getInverseDoumentFrequency(String term){
+    public double getInverseDcoumentFrequency(String term){
         
         double N = listOfDocument.size();
         double n = getDocumentFrequency(term);
@@ -325,19 +325,44 @@ public class InvertedIndex {
     }
     
     public ArrayList<Posting> makeTFIDF(int idDocument){
-        ArrayList<Document> tempDoc = listOfDocument;
-        for (int i = 0; i < tempDoc.size(); i++) {
-            if (tempDoc.get(i).getId() == idDocument) {
-                ArrayList<Posting> tempPost = tempDoc.get(i).getListofPosting();
-                for (int j = 0; j < tempPost.size(); j++) {
-                    double tf = getTermFrequency(tempPost.get(i).getTerm(), tempDoc.get(i).getId());
-                    double idf = getInverseDoumentFrequency(tempPost.get(i).getTerm());
-                    double weight = tf * idf;
-                    tempPost.get(i).setWeight(weight);
-                }
-            return tempPost;
-            }            
+        Document doc = new Document();
+        doc.setId(idDocument);
+        // cek apakah dokument ada
+        int cari = Collections.binarySearch(listOfDocument, doc);
+        if (cari < 0) {
+            // jika document tidak ada
+            return  null;
         }
-        return null;
+        else {
+            // jika document ada
+            doc = listOfDocument.get(cari);
+            ArrayList<Posting> result = doc.getListofPosting();
+            
+            for (int i = 0; i < result.size(); i++) {
+                // buat temp Posting
+                Posting temp = result.get(i);
+                // panggil fungsi hitung idf
+                double idf = getInverseDcoumentFrequency(temp.getTerm());
+                // panggil fungsi hitung tf
+                double tf = temp.getNumberOfTerm();
+                // hitung tf*idf
+                double weight = tf*idf;
+                // set weight ke temp
+                temp.setWeight(weight);
+                // add temp ke result
+                result.add(temp);
+            }
+            return result;
+        }
+    }
+    
+    public double getInnerProduct(ArrayList<Posting> p1, ArrayList<Posting> p2){
+        
+        return 0.0;
+    }
+    
+    public double getQueryPosting(String term){
+        
+        return 0.0;
     }
 }

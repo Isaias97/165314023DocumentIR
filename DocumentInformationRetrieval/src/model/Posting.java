@@ -23,6 +23,10 @@ public class Posting implements Comparable<Posting>{
         this.term = term;
         this.document = document;
     }
+
+    Posting() {
+        
+    }
     
 
     /**

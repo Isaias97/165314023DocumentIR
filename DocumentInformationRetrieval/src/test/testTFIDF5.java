@@ -46,7 +46,7 @@ public class testTFIDF5 {
         
         // idf
         String tempString1 = "silver";
-        double result3 = index.getInverseDoumentFrequency(tempString1);
+        double result3 = index.getDocumentFrequency(tempString1);
         System.out.println("IDF of "+tempString1+" is "+result3);
         
         // tf
