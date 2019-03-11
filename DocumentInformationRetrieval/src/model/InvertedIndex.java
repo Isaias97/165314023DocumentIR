@@ -366,7 +366,32 @@ public class InvertedIndex {
     }
     
     public ArrayList<Posting> getQueryPosting(String term){
-        
-        return null;
+        // menyimpan query sebagai sebuah document
+        Document query = new Document(term);
+        // menambahkan document baru
+        addNewDocument(query); 
+        // menyiapkan queryPost Posting
+        ArrayList<Posting> queryPost = new ArrayList<>();
+        // looping sebanyak document yang disimpan
+        for (int i = 0; i < getListOfDocument().size(); i++) {
+            // menampung tiap term dari document 
+            String[] termQuery = getListOfDocument().get(i).getListofTerm();
+            // looping sebanyak termQuery
+            for (int j = 0; j < termQuery.length; j++) {
+                // buat objek post Posting
+                Posting post = new Posting(termQuery[j], 
+                        getListOfDocument().get(i));
+                // tambahkan post ke queryPost
+                queryPost.add(post);
+            }
+        }
+        // 
+        double tf = 0;
+        for (int i = 0; i < queryPost.size(); i++) {
+            tf = getTermFrequency(queryPost.get(i).getTerm(),i);
+            makeTFIDF(i);
+        }
+        //        
+        return queryPost;
     }
 }
