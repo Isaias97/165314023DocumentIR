@@ -222,7 +222,7 @@ public class InvertedIndex {
         return 0;
     }
     
-    public double getInverseDcoumentFrequency(String term){
+    public double getInverseDocumentFrequency(String term){
         
         double N = listOfDocument.size();
         double n = getDocumentFrequency(term);
@@ -344,7 +344,7 @@ public class InvertedIndex {
                 // buat temp Posting
                 Posting temp = new Posting();
                 // panggil fungsi hitung idf
-                double idf = getInverseDcoumentFrequency(temp.getTerm());
+                double idf = getInverseDocumentFrequency(temp.getTerm());
                 // panggil fungsi hitung tf
                 double tf = temp.getNumberOfTerm();
                 // hitung tf*idf
@@ -365,8 +365,8 @@ public class InvertedIndex {
         return 0.0;
     }
     
-    public double getQueryPosting(String term){
+    public ArrayList<Posting> getQueryPosting(String term){
         
-        return 0.0;
+        return null;
     }
 }

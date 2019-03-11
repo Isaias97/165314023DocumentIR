@@ -47,7 +47,7 @@ public class testTFIDF8 {
         
         // idf
         String tempString1 = "silver";
-        double result3 = index.getInverseDcoumentFrequency(tempString1);
+        double result3 = index.getInverseDocumentFrequency(tempString1);
         System.out.println("IDF of "+tempString1+" is "+result3);
         
         // tf
@@ -58,7 +58,7 @@ public class testTFIDF8 {
         System.out.println("TF of "+tempString2+" in idDoc = "+idDoc+ " is "+result4);
         
         // make arraylist of TFIDF
-        idDoc=3;
+        idDoc=1;
         ArrayList<Posting> tempDocWeight = index.makeTFIDF(idDoc);
         for (int i = 0; i < tempDocWeight.size(); i++) {
             Posting tempPost = tempDocWeight.get(i);
@@ -66,5 +66,30 @@ public class testTFIDF8 {
                     ", tf = "+tempPost.getNumberOfTerm()+
                     ", weight= "+tempPost.getWeight());
         }
+        
+        idDoc=2;
+        ArrayList<Posting> temp1DocWeight = index.makeTFIDF(idDoc);
+        for (int i = 0; i < temp1DocWeight.size(); i++) {
+            Posting tempPost = temp1DocWeight.get(i);
+            System.out.println("term= "+tempPost.getTerm()+
+                    ", tf = "+tempPost.getNumberOfTerm()+
+                    ", weight= "+tempPost.getWeight());
+        }
+        
+        // panggil fungsi inner product
+        double resultProduct = index.getInnerProduct(temp1DocWeight, tempDocWeight);
+        System.out.println("Hasil inner product doc1 dan doc2 = "+resultProduct);
+        
+        //panggil fungsi buat postinglist dar sebuah query
+        ArrayList<Posting> queryPostingList = index.getQueryPosting("silver gold truck");
+        for (int i = 0; i < queryPostingList.size(); i++) {
+            Posting tempPost = queryPostingList.get(i);
+            System.out.println("term= "+tempPost.getTerm()+
+                    ", tf = "+tempPost.getNumberOfTerm()+
+                    ", weight= "+tempPost.getWeight());
+        }
+        // panggil fungsi inner product
+        double result1Product = index.getInnerProduct(queryPostingList, tempDocWeight);
+        System.out.println("Hasil inner product query dan doc1= "+result1Product);
     }
 }
