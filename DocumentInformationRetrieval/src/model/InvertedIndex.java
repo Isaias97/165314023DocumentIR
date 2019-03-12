@@ -361,7 +361,10 @@ public class InvertedIndex {
     }
     
     public double getInnerProduct(ArrayList<Posting> p1, ArrayList<Posting> p2){
-        
+        double[] innerPoduct = null;
+        for (int i = 0; i < getListOfDocument().size(); i++) {
+            innerPoduct[i] = p1.get(i).getWeight() * p2.get(i).getWeight();
+        }
         return 0.0;
     }
     
