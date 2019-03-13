@@ -18,6 +18,10 @@ public class Document implements Comparable<Document>{
     private int id;
     private String content;
 
+    public Document(int id) {
+        this.id = id;
+    }
+
     public Document() {
     }
 

@@ -81,6 +81,8 @@ public class testTFIDF8 {
         System.out.println("Hasil inner product doc1 dan doc2 = "+resultProduct);
         
         //panggil fungsi buat postinglist dar sebuah query
+        String query = "silver gold truck";
+        System.out.println("query = "+query);
         ArrayList<Posting> queryPostingList = index.getQueryPosting("silver gold truck");
         for (int i = 0; i < queryPostingList.size(); i++) {
             Posting tempPost = queryPostingList.get(i);
