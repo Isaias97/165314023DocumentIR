@@ -417,8 +417,13 @@ public class InvertedIndex {
         double cosineSimilarity;
         double tempPost = 0;
         double tempQuery = 0;
-        tempPost = tempPost+Math.pow(0, 2);
-        tempQuery = tempQuery + Math.pow(0, 2);
+        for (int i = 0; i < posting.size(); i++) {
+            tempPost = tempPost+Math.pow(0, 2);            
+        }
+        
+        for (int i = 0; i < posting1.size(); i++) {
+            tempQuery = tempQuery + Math.pow(0, 2);
+        }
         double sqrt = Math.sqrt(tempPost * tempQuery);
         cosineSimilarity = sqrt;
         return cosineSimilarity;
