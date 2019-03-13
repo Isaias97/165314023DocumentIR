@@ -415,15 +415,20 @@ public class InvertedIndex {
     public double getCosineSimilarity(ArrayList<Posting> posting,
             ArrayList<Posting> posting1){
         double cosineSimilarity;
-        cosineSimilarity = Math.sqrt(Math.pow(0, 2) * Math.pow(0, 2));
+        double tempPost = 0;
+        double tempQuery = 0;
+        tempPost = tempPost+Math.pow(0, 2);
+        tempQuery = tempQuery + Math.pow(0, 2);
+        double sqrt = Math.sqrt(tempPost * tempQuery);
+        cosineSimilarity = sqrt;
         return cosineSimilarity;
     }
     
-    public ArrayList<Document> searchTFIDF(String query){
+    public ArrayList<SearchingResult> searchTFIDF(String query){
         return null;
     }
     
-    public ArrayList<Document> searchCosineSimilarity(String query){
+    public ArrayList<SearchingResult> searchCosineSimilarity(String query){
         return null;
     }
 }

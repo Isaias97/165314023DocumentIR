@@ -31,19 +31,19 @@ public class testSearch2 {
         // searching
         String query = "silver gold truck";
         System.out.println("query = " + query);
-        ArrayList<Document> hasilCari1 = index.searchTFIDF(query);
+        ArrayList<SearchingResult> hasilCari1 = index.searchTFIDF(query);
         for (int i = 0; i < hasilCari1.size(); i++) {
-            Document doc = hasilCari1.get(i);
-            System.out.println("IdDokumen = " + doc.getId());
+            SearchingResult doc = hasilCari1.get(i);
+            System.out.println("IdDokumen = " + doc.getDocument().getId());
         }
 
         // searching
         // searching
         System.out.println("query = " + query);
-        ArrayList<Document> hasilCari2 = index.searchCosineSimilarity(query);
+        ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
         for (int i = 0; i < hasilCari2.size(); i++) {
-            Document doc = hasilCari2.get(i);
-            System.out.println("IdDokumen = " + doc.getId());
-}
+            SearchingResult doc = hasilCari2.get(i);
+            System.out.println("IdDokumen = " + doc.getDocument().getId());
+        }
     }
 }
