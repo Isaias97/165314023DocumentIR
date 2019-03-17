@@ -459,28 +459,11 @@ public class InvertedIndex {
     }
     
     public ArrayList<SearchingResult> searchTFIDF(String query){
-        // 
-        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
-        ArrayList<Posting> post = getQueryPosting(query);
-        for (int i = 0; i < getListOfDocument().size(); i++) {
-            ArrayList<Posting> temp = makeTFIDF(getListOfDocument().get(i).getId());
-            double cosSimilarity = getCosineSimilarity(post, temp);
-            SearchingResult doc = new SearchingResult(cosSimilarity, getListOfDocument().get(i));
-            result.add(doc);                    
-        }
-        Collections.sort(result);
-        Collections.reverse(result);
-        return result;
+        return null;
+        
     }
     
     public ArrayList<SearchingResult> searchCosineSimilarity(String query){
-        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
-        for (int i = 0; i < getListOfDocument().size(); i++) {
-            ArrayList<Posting> post = makeTFIDF(getListOfDocument().get(i).getId());
-            double similarity = getCosineSimilarity(post, post);
-            result.get(i).setSimilarity(similarity);
-            result.get(i).setDocument(post.get(i).getDocument());
-        }
-        return result;
+        return null;
     }
 }
