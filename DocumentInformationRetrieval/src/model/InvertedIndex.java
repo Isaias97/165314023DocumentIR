@@ -6,6 +6,7 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -507,22 +508,23 @@ public class InvertedIndex {
         return result;
     }
     
-    public void readDirectory(File directory){
+    public void readDirectory(File directory) throws IOException{
         // baca isi directory
         File files[] = directory.listFiles();
             for (int i = 0; i < files.length; i++) {
-                // buat document baru
+                // membuat document baru
                 Document doc = new Document();
-                doc.setId(i); // set idDoc sama dengan i
+                // menyimpan i ke setId
+                doc.setId(i); 
                 // baca isi file
                 // Isi file disimpan di atribut content dari objeck document
                 // variabel i merupakan idDocument;
                 File file = files[i];
                 doc.readFile(i+1, file);
-                // masukkan file isi directory ke list of document pada obye index
+                // menambahkan doc
                 this.addNewDocument(doc);
             }
-            // lakukan indexing atau buat dictionary
+            // melakukan indexing atau membuat dictionary
         this.makeDictionaryWithTermNumber();
     }
 }

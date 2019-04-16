@@ -14,7 +14,7 @@ import model.*;
  * @author Aureli Isaias
  */
 public class testFileDocument2 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         InvertedIndex index = new InvertedIndex();
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -26,7 +26,7 @@ public class testFileDocument2 {
         }
         
         ArrayList<Document> listDoc = index.getListOfDocument();
-        for (int i = 0; i < args.length; i++) {
+        for (int i = 0; i < listDoc.size(); i++) {
             Document doc = listDoc.get(i);
             System.out.println("Content : "+doc.getId());
             System.out.println(doc.getContent());

@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -121,22 +122,26 @@ public class Document implements Comparable<Document>{
         this.id = id;
         // baca file
         try {
+            // menyimpan file ke objek bacaFile
             FileReader bacaFile = new FileReader(file);
+            // menyimpan bacaFile ke bjek bufReader
             BufferedReader bufReader = new BufferedReader(bacaFile);
+            // menyiapkan variable str bertipe String
             String str;
-            
-            str = bufReader.readLine();
-            
-            while (str != null) {            
-                this.setContent(content);
+            // melakukan looping 
+            while ((str = bufReader.readLine()) != null) {            
+                // menyimpan str ke content
+                this.setContent(str);
             }
-
+            // menutup bufReader
             bufReader.close();
-        }  catch (FileNotFoundException f){
+        }  
+        // apabila terjadi error maka akan menampilkan pesan
+        catch (FileNotFoundException f){            
             System.out.println("File not found");
         }        
-        catch (Exception e) {
-            System.out.println(e);
+        catch (IOException e) {
+            System.out.println(e.toString());
         }
     }
     
