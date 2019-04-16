@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -504,5 +505,24 @@ public class InvertedIndex {
         Collections.reverse(result);
         // return result
         return result;
+    }
+    
+    public void readDirectory(File directory){
+        // baca isi directory
+        File files[] = directory.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                // buat document baru
+                Document doc = new Document();
+                doc.setId(i); // set idDoc sama dengan i
+                // baca isi file
+                // Isi file disimpan di atribut content dari objeck document
+                // variabel i merupakan idDocument;
+                File file = files[i];
+                doc.readFile(i+1, file);
+                // masukkan file isi directory ke list of document pada obye index
+                this.addNewDocument(doc);
+            }
+            // lakukan indexing atau buat dictionary
+        this.makeDictionaryWithTermNumber();
     }
 }

@@ -5,7 +5,10 @@
  */
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -114,7 +117,27 @@ public class Document implements Comparable<Document>{
     }
     
     public void readFile(int id, File file){
-        
+        // simpan id doc
+        this.id = id;
+        // baca file
+        try {
+            FileReader bacaFile = new FileReader(file);
+            BufferedReader bufReader = new BufferedReader(bacaFile);
+            String str;
+            
+            str = bufReader.readLine();
+            
+            while (str != null) {            
+                this.setContent(content);
+            }
+
+            bufReader.close();
+        }  catch (FileNotFoundException f){
+            System.out.println("File not found");
+        }        
+        catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
     @Override
