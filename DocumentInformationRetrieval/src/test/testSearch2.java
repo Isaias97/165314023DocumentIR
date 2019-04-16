@@ -38,7 +38,6 @@ public class testSearch2 {
         }
 
         // searching
-        // searching
         System.out.println("query = " + query);
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
         for (int i = 0; i < hasilCari2.size(); i++) {
