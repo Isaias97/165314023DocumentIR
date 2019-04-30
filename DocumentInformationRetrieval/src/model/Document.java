@@ -10,10 +10,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import javafx.print.Collation;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.StopFilter;
+import org.apache.lucene.analysis.en.PorterStemFilter;
+import org.apache.lucene.analysis.id.IndonesianAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
 
 /**
  *
@@ -22,6 +33,7 @@ import javafx.print.Collation;
 public class Document implements Comparable<Document>{
     private int id;
     private String content;
+    private String realContent;
 
     public Document(int id) {
         this.id = id;
@@ -32,11 +44,13 @@ public class Document implements Comparable<Document>{
 
     public Document(String content) {
         this.content = content;
+        this.realContent = content;
     }
 
     public Document(int id, String content) {
         this.id = id;
         this.content = content;
+        this.realContent = content;
     }
     
     /**
@@ -65,6 +79,14 @@ public class Document implements Comparable<Document>{
      */
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getRealContent() {
+        return realContent;
+    }
+
+    public void setRealContent(String realContent) {
+        this.realContent = realContent;
     }
     
     public String[] getListofTerm(){
@@ -144,9 +166,102 @@ public class Document implements Comparable<Document>{
             System.out.println(e.toString());
         }
     }
+
+    @Override
+    public String toString() {
+        return "Document{" + "id=" + id + ", content=" + content + ", realContent=" + realContent + '}';
+    }
     
     @Override
     public int compareTo(Document t) {
         return id - t.getId();
+    }
+    
+    /* 
+    fungsi untuk menghilankan kata
+    */
+    public void removeStopWord(){
+        String text = content;
+        Version matchVersion = Version.LUCENE_7_7_0;
+        Analyzer analyzer = new StandardAnalyzer();
+        analyzer.setVersion(matchVersion);
+        
+        //ambil stopwords
+        CharArraySet stopword = EnglishAnalyzer.getDefaultStopSet();
+        // buat token
+        TokenStream tokenStream = analyzer.tokenStream("myField", 
+                new StringReader(text.trim()));
+        
+        tokenStream = new StopFilter(tokenStream, stopword);
+        
+        StringBuilder sb = new StringBuilder();
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        try {
+            tokenStream.reset();
+            while (tokenStream.incrementToken()) {                
+                String term = charTermAttribute.toString();
+                sb.append(term + " ");
+            }
+        } catch (Exception e) {
+            System.out.println("Exection: "+e);
+        }
+        content = sb.toString();
+    }
+    
+    /**
+     * fungsi untuk menghilangkan stop word dan steaming
+     */
+    public void Stemming(){
+        String text = content;
+        Version matchVersion = Version.LUCENE_7_7_0;
+        Analyzer analyzer = new StandardAnalyzer();
+        analyzer.setVersion(matchVersion);
+        
+        // buat token
+        TokenStream tokenStream = analyzer.tokenStream("myField", 
+                new StringReader(text.trim()));
+        
+        tokenStream = new PorterStemFilter(tokenStream);
+        
+        StringBuilder sb = new StringBuilder();
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        try {
+            tokenStream.reset();
+            while (tokenStream.incrementToken()) {                
+                String term = charTermAttribute.toString();
+                sb.append(term + " ");
+            }
+        } catch (Exception e) {
+            System.out.println("Exection: "+e);
+        }
+        content = sb.toString();
+    }
+    
+    public void IndonesiaStem(){
+        String text = content;
+        Version matchVersion = Version.LUCENE_7_7_0;
+        Analyzer analyzer = new IndonesianAnalyzer();
+        analyzer.setVersion(matchVersion);
+        
+        //ambil stopwords
+        CharArraySet stopword = IndonesianAnalyzer.getDefaultStopSet();
+        // buat token
+        TokenStream tokenStream = analyzer.tokenStream("myField", 
+                new StringReader(text.trim()));
+        
+        tokenStream = new StopFilter(tokenStream, stopword);
+        
+        StringBuilder sb = new StringBuilder();
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        try {
+            tokenStream.reset();
+            while (tokenStream.incrementToken()) {                
+                String term = charTermAttribute.toString();
+                sb.append(term + " ");
+            }
+        } catch (Exception e) {
+            System.out.println("Exection: "+e);
+        }
+        content = sb.toString();
     }
 }
