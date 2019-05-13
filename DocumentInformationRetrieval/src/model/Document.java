@@ -237,8 +237,7 @@ public class Document implements Comparable<Document>{
         content = sb.toString();
     }
     
-    public void IndonesiaStem(){
-        String text = content;
+    public void IndonesiaStemming(){
         Version matchVersion = Version.LUCENE_7_7_0;
         Analyzer analyzer = new IndonesianAnalyzer();
         analyzer.setVersion(matchVersion);
@@ -247,7 +246,7 @@ public class Document implements Comparable<Document>{
         CharArraySet stopword = IndonesianAnalyzer.getDefaultStopSet();
         // buat token
         TokenStream tokenStream = analyzer.tokenStream("myField", 
-                new StringReader(text.trim()));
+                new StringReader(realContent.trim()));
         
         tokenStream = new StopFilter(tokenStream, stopword);
         

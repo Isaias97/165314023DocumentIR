@@ -17,7 +17,7 @@ public class TestDocumentIndonesianStemming {
         System.out.println("Tanpa stemming");
         System.out.println(doc);
         System.out.println("Dengan stemming");
-        doc.IndonesiaStem();
+        doc.IndonesiaStemming();
         System.out.println(doc);
     }
 }
