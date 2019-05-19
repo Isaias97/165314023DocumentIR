@@ -34,7 +34,8 @@ public class Document implements Comparable<Document>{
     private int id;
     private String content;
     private String realContent;
-
+    ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
+    
     public Document(int id) {
         this.id = id;
     }
@@ -263,4 +264,18 @@ public class Document implements Comparable<Document>{
         }
         content = sb.toString();
     }
+    
+    /**
+     * @return the listOfPosting
+     */
+    public ArrayList<Posting> getListOfClusteringPosting() {
+        return listOfClusteringPosting;
+    }
+
+    /**
+     * @param listOfPosting the listOfPosting to set
+     */
+    public void setListOfPosting(ArrayList<Posting> listOfPosting) {
+        this.listOfClusteringPosting = listOfPosting;
+}
 }

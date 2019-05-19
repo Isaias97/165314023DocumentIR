@@ -17,6 +17,10 @@ import java.util.Collections;
 public class InvertedIndex {
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
+    private ArrayList<Clustering> cluster = new ArrayList<Clustering>();
+    public static final int Number_Of_Cluster = 2;
+    private ArrayList<Posting> listOfDocumentPosting = new ArrayList<Posting>();
+    
     public InvertedIndex() {
     }
     
@@ -526,5 +530,23 @@ public class InvertedIndex {
             }
             // melakukan indexing atau membuat dictionary
         this.makeDictionaryWithTermNumber();
+    }
+    
+    public ArrayList<Clustering> getCluster() {
+        return cluster;
+    }
+    
+    public void setClustering(ArrayList<Clustering> cluster){
+        this.cluster = cluster;
+    }
+    
+    public void preClustering(){
+         // baca seluruh document
+        for(int i=0;i<listOfDocument.size();i++){
+            // baca idDoc
+            int idDoc = listOfDocument.get(i).getId();
+            // buat posting dengan nilai TF-IDFnya
+            listOfDocument.get(i).setListOfPosting(makeTFIDF(idDoc));        
+        }
     }
 }
