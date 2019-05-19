@@ -19,6 +19,10 @@ public class Clustering {
     public Clustering() {
     }
     
+    public Clustering(int idCluster) {
+        this.idCluster = idCluster;
+    }
+    
     /**
      * @return the member
      */
